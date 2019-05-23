@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 @Component({
   selector: "app-profile-editor",
@@ -7,14 +7,16 @@ import { FormGroup, FormControl } from "@angular/forms";
   styleUrls: ["./profile-editor.component.sass"],
 })
 export class ProfileEditorComponent {
-  public profileForm: FormGroup = new FormGroup({
-    firstName: new FormControl(""),
-    lastName: new FormControl(""),
-    address: new FormGroup({
-      street: new FormControl(""),
-      city: new FormControl(""),
-      state: new FormControl(""),
-      zip: new FormControl(""),
+  constructor(private fb: FormBuilder) {}
+
+  public profileForm: FormGroup = this.fb.group({
+    firstName: ["", Validators.required],
+    lastName: [""],
+    address: this.fb.group({
+      street: [""],
+      city: [""],
+      state: [""],
+      zip: [""],
     }),
   });
 
